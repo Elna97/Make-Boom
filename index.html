@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAKE BOOM | UI/UX Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* انميشن الخلفية المتحركة */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff3e3e;
+            box-shadow: 0 20px 40px rgba(255, 62, 62, 0.2);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at center, #ff3e3e33 0%, transparent 70%);
+        }
+
+        .floating-ui {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* انميشن الصاروخ */
+        .rocket-btn:hover .rocket-icon {
+            transform: translate(10px, -10px);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md">
+        <div class="text-3xl font-black tracking-tighter text-white">MAKE <span class="text-red-600">BOOM</span></div>
+        <div class="hidden md:flex gap-8 text-sm font-bold">
+            <a href="#" class="hover:text-red-500 transition">الرئيسية</a>
+            <a href="#" class="hover:text-red-500 transition">أعمالنا</a>
+            <a href="#" class="hover:text-red-500 transition">خدماتنا</a>
+            <a href="#" class="bg-red-600 px-6 py-2 rounded-full hover:bg-white hover:text-black transition">تواصل معنا</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 hero-gradient">
+        <div class="absolute top-20 right-10 w-64 h-64 bg-red-600/20 blur-3xl rounded-full floating-ui"></div>
+        
+        <h1 class="text-6xl md:text-8xl font-black mb-6 animate__animated animate__fadeInUp">
+            WE MAKE IT <br> <span class="text-red-600">BOOM!</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+            نحن لا نصمم مجرد واجهات، نحن نصنع تجارب رقمية تنفجر إبداعاً وتترك أثراً لا ينسى.
+        </p>
+        
+        <a href="https://wa.me/YOUR_NUMBER" class="rocket-btn bg-white text-black px-10 py-4 rounded-full font-black text-xl flex items-center gap-3 transition-all animate__animated animate__bounceIn animate__delay-2s">
+            ابدأ مشروعك (🚀)
+        </a>
+    </section>
+
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center">إبداعنا في <span class="text-red-600">UI/UX</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 relative overflow-hidden group">
+                    <div class="text-red-600 text-5xl mb-6 font-black">01</div>
+                    <h3 class="text-2xl font-bold mb-4">تحليل التجربة (UX)</h3>
+                    <p class="text-gray-400 text-sm">ندرس سلوك المستخدم لنبني رحلة سهلة ومنطقية داخل تطبيقك.</p>
+                    <div class="mt-8 w-full h-32 bg-gradient-to-t from-red-600/20 to-transparent rounded-lg transform translate-y-10 group-hover:translate-y-0 transition-all"></div>
+                </div>
+
+                <div class="glass-card p-8 border-red-600 shadow-2xl scale-105">
+                    <div class="text-red-600 text-5xl mb-6 font-black">02</div>
+                    <h3 class="text-2xl font-bold mb-4">تصميم الواجهات (UI)</h3>
+                    <p class="text-gray-400 text-sm">واجهات عصرية، بسيطة، ومبهرة بصرياً تعكس هوية شركتك.</p>
+                    <div class="mt-8 w-full h-32 bg-red-600 rounded-lg flex items-center justify-center font-bold">نموذج حي</div>
+                </div>
+
+                <div class="glass-card p-8 relative overflow-hidden group">
+                    <div class="text-red-600 text-5xl mb-6 font-black">03</div>
+                    <h3 class="text-2xl font-bold mb-4">الانميشن (Motion)</h3>
+                    <p class="text-gray-400 text-sm">نضيف لمسات سحرية من التحركات تجعل التفاعل مع الموقع ممتعاً.</p>
+                    <div class="mt-8 w-full h-32 bg-gradient-to-t from-red-600/20 to-transparent rounded-lg transform translate-y-10 group-hover:translate-y-0 transition-all"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-6">جاهز لتفجير طاقتك الإبداعية؟</h2>
+        <div class="text-red-600 text-xl font-bold cursor-pointer hover:underline tracking-widest">
+            طلبك عندنا
+        </div>
+        <p class="mt-10 text-gray-500 text-sm">© 2024 MAKE BOOM Agency. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // إضافة تأثير تحرك الماوس على الكروت (Parallax خفيف)
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-card');
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+
+            cards.forEach(card => {
+                card.style.transform = `translate(${mouseX * 20}px, ${mouseY * 20}px) translateY(${card.classList.contains('scale-105') ? '-10px' : '0px'})`;
+            });
+        });
+    </script>
+</body>
+</html>
