@@ -1,217 +1,291 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAKE BOOM | Viral Content Agency</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background-color: #030303; /* أسود أعمق */
-            color: #eeeeee; 
-            overflow-x: hidden; 
-        }
-        .english-font { font-family: 'Montserrat', sans-serif; }
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Instagram, MessageCircle, Video, TrendingUp, Target, Gift, CheckCircle, ArrowRight, Zap, Star } from 'lucide-react';
 
-        /* --- تأثيرات الدخان/الحبر الخلفي --- */
-        .smoke-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;
-        }
-        .smoke-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: smokeDrift infinite alternate-reverse ease-in-out;
-        }
-        /* تعريف حركات عشوائية للدخان */
-        @keyframes smokeDrift {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { transform: translate(100px, -50px) scale(1.3) rotate(20deg); }
-        }
+export default function MakeBoomPortfolio() {
+  const [email, setEmail] = useState('');
+  const [showOffer, setShowOffer] = useState(false);
+  const [activeService, setActiveService] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
-        /* --- لوح الزجاج الرئيسي في الهيرو --- */
-        .hero-glass-panel {
-            background: rgba(10, 10, 10, 0.4); /* لون داكن جداً وشفاف */
-            backdrop-filter: blur(20px) saturate(1.1); /* تمويه قوي */
-            border: 1px solid rgba(255, 255, 255, 0.05); /* حدود خفيفة جداً */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); /* ظل عميق */
-            border-radius: 30px;
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        /* لمعة خفيفة على الزجاج */
-        .hero-glass-panel::before {
-            content: ''; position: absolute; top: 0; left: -50%; width: 100%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-25deg); pointer-events: none;
-        }
+  // روابط التواصل - ضع روابطك هنا
+  const WHATSAPP_LINK = "https://wa.me/201234567890"; // غير الرقم برقمك
+  const INSTAGRAM_LINK = "https://instagram.com/makeboom"; // غير باسم حسابك
 
-        /* --- بلوكات الفيديو الزجاجية (الأهم) --- */
-        .glass-video-block {
-            aspect-ratio: 9/16;
-            border-radius: 25px; /* حواف دائرية أكثر */
-            position: relative; overflow: hidden;
-            
-            /* أساس الزجاج */
-            background: rgba(20, 20, 20, 0.3);
-            backdrop-filter: blur(25px); /* تمويه قوي جداً للمحتوى الخلفي */
-            
-            /* --- الحواف اللامعة الجذابة --- */
-            /* الحافة العلوية واليسرى فاتحة (إضاءة) */
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            /* الحافة السفلية واليمنى غامقة (ظل) */
-            border-bottom: 1px solid rgba(0, 0, 0, 0.8);
-            border-right: 1px solid rgba(0, 0, 0, 0.8);
-            
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-        .glass-video-block:hover {
-            transform: translateY(-10px) scale(1.02);
-            /* عند التحويم، الحواف تتوهج بالأحمر */
-            border-color: rgba(255, 30, 30, 0.5);
-            box-shadow: 
-                inset 0 0 30px rgba(255, 0, 0, 0.1), /* توهج داخلي */
-                0 30px 60px rgba(220, 20, 60, 0.3); /* توهج خارجي */
-        }
+  const services = [
+    {
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: "توزيع المحتوى الاحترافي",
+      desc: "نوصل محتواك لأكبر عدد من جمهورك المستهدف بخطط توزيع ذكية",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: <Video className="w-8 h-8" />,
+      title: "مونتاج ريلز فيرال",
+      desc: "نحول أفكارك لريلز تنتشر كالنار في الهشيم وتحقق ملايين المشاهدات",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "فيديوهات طويلة احترافية",
+      desc: "إنتاج فيديوهات عالية الجودة تبني مصداقية برندك وتزيد ولاء العملاء",
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      icon: <Target className="w-8 h-8" />,
+      title: "استشارات بناء البراند",
+      desc: "خطط استراتيجية مخصصة تبني برندك من الصفر للقمة",
+      color: "from-green-500 to-emerald-500"
+    }
+  ];
 
-        .video-content {
-            position: absolute; inset: 10px; /* مسافة داخلية للحواف */
-            background-size: cover; background-position: center;
-            border-radius: 18px; overflow: hidden;
-        }
-        
-        .video-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, transparent 60%);
-            opacity: 0; transition: opacity 0.3s ease-in-out;
-        }
-        .glass-video-block:hover .video-overlay { opacity: 1; }
+  const handleEmailSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      setShowOffer(true);
+      setTimeout(() => {
+        window.open(WHATSAPP_LINK, '_blank');
+      }, 1500);
+    }
+  };
 
-        /* تنسيق الكروت العادية */
-        .service-card {
-            background: rgba(15, 15, 15, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .service-card:hover { border-color: #ff0000; background: rgba(25, 20, 20, 0.9); transform: translateY(-5px);}
-    </style>
-</head>
-<body>
+  const handleInstagramFollow = () => {
+    setShowOffer(true);
+    window.open(INSTAGRAM_LINK, '_blank');
+  };
 
-    <nav class="fixed w-full z-50 px-8 py-5 flex justify-between items-center backdrop-blur-xl border-b border-white/5 bg-black/20">
-        <div class="text-2xl font-black english-font tracking-tighter">MAKE <span class="text-red-600">BOOM</span></div>
-        <a href="https://wa.link/wuk00w" target="_blank" class="bg-red-600/90 backdrop-blur-md px-6 py-2 rounded-xl text-sm font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20">ابدا الآن</a>
-    </nav>
-
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
-        
-        <div class="smoke-container">
-            <div class="smoke-blob bg-black w-96 h-96 top-1/4 left-1/4" style="animation-duration: 15s;"></div>
-            <div class="smoke-blob bg-[#0a0a0a] w-[500px] h-[500px] bottom-0 right-0" style="animation-duration: 20s; animation-delay: -5s;"></div>
-            <div class="smoke-blob bg-red-900/20 w-64 h-64 top-0 right-1/3" style="animation-duration: 12s; animation-delay: -2s;"></div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+      
+      {/* Hero Section */}
+      <div className="relative min-h-screen flex items-center justify-center px-4">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl animate-pulse"
+              style={{
+                width: Math.random() * 300 + 50 + 'px',
+                height: Math.random() * 300 + 50 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                animationDelay: Math.random() * 3 + 's',
+                animationDuration: Math.random() * 3 + 3 + 's'
+              }}
+            />
+          ))}
         </div>
 
-        <div class="hero-glass-panel max-w-4xl mx-auto animate__animated animate__fadeInUp">
-            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-none">
-                WE MAKE IT <br> 
-                <span class="text-red-600 english-font tracking-tighter italic text-glow animate__animated animate__pulse animate__infinite">MAKEBOOM</span>
-            </h1>
-            
-            <p class="text-gray-400 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
-                وكالة متخصصة في تحويل المحتوى العادي إلى تريند فيرال. مونتاج سينمائي، وتوزيع استراتيجي يضمن الانتشار.
-            </p>
-            
-            <a href="https://wa.link/wuk00w" class="inline-block bg-white text-black px-14 py-5 rounded-full font-black text-xl hover:bg-red-600 hover:text-white transition-all transform hover:scale-105 shadow-2xl shadow-white/10 hover:shadow-red-600/30">
-                🚀 اطلب قنبلتك الآن
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          {/* Logo */}
+          <div className="mb-8 inline-block">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 blur-2xl opacity-50 animate-pulse"></div>
+              <h1 className="relative text-7xl md:text-9xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
+                MAKE BOOM
+              </h1>
+            </div>
+          </div>
+
+          {/* Headline */}
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+            خلّي برندك <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">ينفجر</span> في السوشيال ميديا! 💥
+          </h2>
+          
+          <p className="text-xl md:text-2xl text-purple-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+            من <span className="text-pink-400 font-bold">الصفر للفيرال</span> - محتوى يتكلم، استراتيجيات تنجح، ونتائج تفرق!
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <a 
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 transform hover:scale-105 transition-all shadow-2xl hover:shadow-green-500/50"
+            >
+              <MessageCircle className="w-6 h-6 animate-bounce" />
+              كلمنا على واتساب دلوقتي
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
+            
+            <button
+              onClick={handleInstagramFollow}
+              className="group bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 transform hover:scale-105 transition-all shadow-2xl hover:shadow-pink-500/50"
+            >
+              <Instagram className="w-6 h-6" />
+              تابعنا على Instagram
+              <Gift className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+            </button>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
+              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              <span>محتوى فيرال مضمون</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
+              <Zap className="w-4 h-4 text-orange-400" />
+              <span>تسليم سريع</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
+              <CheckCircle className="w-4 h-4 text-green-400" />
+              <span>جودة احترافية 100%</span>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <section class="py-24 px-8 bg-[#050505] relative z-10">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="service-card p-10 rounded-3xl">
-                <div class="text-red-600 mb-4 text-4xl">⚡</div>
-                <h3 class="text-xl font-bold mb-3">Viral Editing Hooks</h3>
-                <p class="text-gray-500 text-sm">مونتاج يخطف الانتباه من أول ثانية باستخدام تقنيات نفسية وبصرية متقدمة.</p>
-            </div>
-            <div class="service-card p-10 rounded-3xl border-red-600/20 shadow-xl shadow-red-900/10">
-                <div class="text-red-600 mb-4 text-4xl">🔄</div>
-                <h3 class="text-xl font-bold mb-3">Content Repurposing</h3>
-                <p class="text-gray-500 text-sm">نحول الفيديو الطويل إلى عشرات الفيديوهات القصيرة (Shorts/Reels) لغزو المنصات.</p>
-            </div>
-            <div class="service-card p-10 rounded-3xl">
-                <div class="text-red-600 mb-4 text-4xl">📈</div>
-                <h3 class="text-xl font-bold mb-3">Growth Strategy</h3>
-                <p class="text-gray-500 text-sm">استراتيجيات توزيع مدروسة لضمان وصول المحتوى لجمهورك المستهدف وتحقيق المبيعات.</p>
-            </div>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-purple-400 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-purple-400 rounded-full mt-2 animate-pulse"></div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section class="py-32 px-8 bg-[#030303] relative" id="portfolio">
-        <div class="smoke-container opacity-30">
-             <div class="smoke-blob bg-red-900/10 w-[600px] h-[600px] top-0 left-0"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16 animate__animated animate__fadeIn">
-                <h2 class="text-4xl md:text-5xl font-black mb-2">أعمالنا الفيرال</h2>
-                <p class="text-red-600 font-bold uppercase tracking-[0.3em] text-sm">Our Glass Portfolio</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <a href="رابط_الفيديو_1" target="_blank" class="glass-video-block group animate__animated animate__fadeInUp">
-                    <div class="video-content" style="background-image: url('https://i.ibb.co/FmPm08z/reel-placeholder-1.jpg');"> <div class="video-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <span class="text-white font-bold text-lg">عنوان الفيديو الأول</span>
-                            <span class="text-red-500 text-sm font-bold mt-2 flex items-center gap-2">🔥 مشاهدة الـ Reel</span>
-                        </div>
+      {/* Services Section */}
+      <div className="relative py-20 px-4 bg-black/30 backdrop-blur">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-4">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              خدماتنا
+            </span>
+          </h2>
+          <p className="text-center text-purple-200 text-xl mb-16">اختار الباقة اللي تناسب طموحك 🚀</p>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {services.map((service, idx) => (
+              <div
+                key={idx}
+                onMouseEnter={() => setActiveService(idx)}
+                className={`group relative bg-gradient-to-br ${service.color} p-[2px] rounded-3xl transform hover:scale-105 transition-all duration-300 cursor-pointer`}
+              >
+                <div className="bg-slate-900 rounded-3xl p-8 h-full">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`bg-gradient-to-br ${service.color} p-4 rounded-2xl group-hover:rotate-12 transition-transform`}>
+                      {service.icon}
                     </div>
-                </a>
-
-                 <a href="رابط_الفيديو_2" target="_blank" class="glass-video-block group animate__animated animate__fadeInUp animate__delay-1s">
-                    <div class="video-content" style="background-image: url('https://i.ibb.co/FmPm08z/reel-placeholder-1.jpg');"> <div class="video-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <span class="text-white font-bold text-lg">عنوان الفيديو الثاني</span>
-                            <span class="text-red-500 text-sm font-bold mt-2 flex items-center gap-2">🔥 مشاهدة الـ Reel</span>
-                        </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+                      <p className="text-purple-200 leading-relaxed">{service.desc}</p>
                     </div>
-                </a>
+                  </div>
+                  
+                  <div className={`mt-6 p-4 bg-gradient-to-r ${service.color} bg-opacity-10 rounded-xl border border-purple-500/30`}>
+                    <p className="text-sm font-bold flex items-center gap-2">
+                      <Gift className="w-5 h-5 text-yellow-400" />
+                      <span className="text-yellow-400">عرض خاص:</span>
+                      <span>استشارة مجانية مع أول طلب!</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-                 <a href="رابط_الفيديو_3" target="_blank" class="glass-video-block group animate__animated animate__fadeInUp animate__delay-2s">
-                    <div class="video-content" style="background-image: url('https://i.ibb.co/FmPm08z/reel-placeholder-1.jpg');"> <div class="video-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <span class="text-white font-bold text-lg">عنوان الفيديو الثالث</span>
-                            <span class="text-red-500 text-sm font-bold mt-2 flex items-center gap-2">🔥 مشاهدة الـ Reel</span>
-                        </div>
-                    </div>
-                </a>
-
-                 <a href="رابط_الفيديو_4" target="_blank" class="glass-video-block group animate__animated animate__fadeInUp animate__delay-3s">
-                    <div class="video-content" style="background-image: url('https://i.ibb.co/FmPm08z/reel-placeholder-1.jpg');"> <div class="video-overlay absolute inset-0 flex flex-col justify-end p-6">
-                            <span class="text-white font-bold text-lg">عنوان الفيديو الرابع</span>
-                            <span class="text-red-500 text-sm font-bold mt-2 flex items-center gap-2">🔥 مشاهدة الـ Reel</span>
-                        </div>
-                    </div>
-                </a>
-
+      {/* Offer Section */}
+      <div className="relative py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-gradient-to-r from-yellow-500 to-orange-600 p-[3px] rounded-3xl">
+            <div className="bg-slate-900 rounded-3xl p-12">
+              <Gift className="w-16 h-16 mx-auto mb-6 text-yellow-400 animate-bounce" />
+              <h2 className="text-3xl md:text-5xl font-black mb-6">
+                🎁 عرض حصري لفترة محدودة!
+              </h2>
+              <p className="text-xl md:text-2xl text-purple-200 mb-8 leading-relaxed">
+                <span className="text-yellow-400 font-bold">استشارة استراتيجية مجانية</span> لبناء برندك 
+                <br />مع أي خدمة من باقة BOOM! 💎
+              </p>
+              
+              {!showOffer ? (
+                <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
+                  <p className="text-lg mb-4 text-purple-300">احجز مكانك دلوقتي واحصل على العرض:</p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="ايميلك هنا..."
+                      required
+                      className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur border border-purple-500/50 focus:border-purple-400 focus:outline-none text-white placeholder-purple-300"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full font-bold whitespace-nowrap transform hover:scale-105 transition-all"
+                    >
+                      احجز العرض 🚀
+                    </button>
+                  </div>
+                  <p className="text-sm text-purple-300 mt-4">أو تابعنا على Instagram واحصل على نفس العرض!</p>
+                </form>
+              ) : (
+                <div className="animate-bounce">
+                  <CheckCircle className="w-20 h-20 mx-auto mb-4 text-green-400" />
+                  <p className="text-2xl font-bold text-green-400">تم! 🎉</p>
+                  <p className="text-lg text-purple-200 mt-2">هنتواصل معاك على واتساب دلوقتي!</p>
+                </div>
+              )}
             </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <footer class="py-24 border-t border-white/5 text-center bg-black relative z-10">
-        <div class="english-font text-5xl font-black mb-8 tracking-tighter">MAKE <span class="text-red-600">BOOM</span></div>
-        <div class="flex justify-center gap-8 mb-8">
-            <a href="https://wa.link/wuk00w" class="text-gray-400 hover:text-red-500 transition font-bold text-lg">WhatsApp</a>
-            <a href="https://www.instagram.com/makeb.oom/" class="text-gray-400 hover:text-red-500 transition font-bold text-lg">Instagram</a>
+      {/* Final CTA */}
+      <div className="relative py-20 px-4 bg-gradient-to-r from-purple-900 to-pink-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-black mb-6">
+            مستعد تخلي برندك يعمل 
+            <span className="block text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text animate-pulse">
+              BOOM! 💥
+            </span>
+          </h2>
+          <p className="text-xl md:text-2xl mb-10 text-purple-100">
+            ابدأ رحلتك للنجاح دلوقتي - فريقنا مستني رسالتك!
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white text-purple-900 hover:bg-purple-50 px-10 py-5 rounded-full font-black text-xl flex items-center justify-center gap-3 transform hover:scale-110 transition-all shadow-2xl"
+            >
+              <MessageCircle className="w-7 h-7" />
+              كلمنا الآن
+              <Sparkles className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
+            </a>
+          </div>
+
+          <p className="mt-8 text-purple-200 text-sm">
+            ⚡ رد فوري على واتساب - خلال دقائق!
+          </p>
         </div>
-        <p class="text-gray-600 text-sm">© 2024 MAKEBOOM. All rights reserved.</p>
-    </footer>
+      </div>
 
-</body>
-</html>
+      {/* Footer */}
+      <footer className="bg-black/50 backdrop-blur py-8 px-4 text-center text-purple-300">
+        <p className="font-bold text-2xl mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          MAKE BOOM
+        </p>
+        <p className="text-sm">نحول أحلامك لواقع رقمي ينفجر نجاحاً 💥</p>
+        <div className="flex justify-center gap-4 mt-4">
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+            <MessageCircle className="w-6 h-6" />
+          </a>
+          <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">
+            <Instagram className="w-6 h-6" />
+          </a>
+        </div>
+      </footer>
+    </div>
+  );
+}
